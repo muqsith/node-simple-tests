@@ -29,5 +29,5 @@ const linebyline = new LineByLine({encoding: 'utf8'});
 
 let rl = readline.createInterface({
     input: fileReadStream,
-    output: process.stdout
+    output: linebyline
 });
