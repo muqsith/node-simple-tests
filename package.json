@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "config": "^1.28.1",
     "sax": "^1.2.4"
   }
 }

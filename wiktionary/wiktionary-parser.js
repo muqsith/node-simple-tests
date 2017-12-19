@@ -1,9 +1,10 @@
 const fs = require('fs'),
+    os = require('os'),
+    config = require('config'),
     sax = require('sax').createStream(true),
-    INPUT_FILE_PATH = '/Users/muqsithirfan/Development/data/enwiktionary-20171120-pages-articles.xml',
-    OUTPUT_FILE_PATH = '/Users/muqsithirfan/Development/data/enwiktionary-20171120-pages-articles.json',
-    fileReadStream = fs.createReadStream(INPUT_FILE_PATH),
-    fileWriteStream = fs.createWriteStream(OUTPUT_FILE_PATH,{encoding: 'utf8'})
+    wiktionary = config.get('wiktionary'),
+    fileReadStream = fs.createReadStream(wiktionary.xml),
+    fileWriteStream = fs.createWriteStream(wiktionary.json, {encoding: 'utf8'})
     ;
 
 const MAIN = 'page',
@@ -103,12 +104,8 @@ sax.on('closetag', (name) => {
     setTagMode(name, false);
     if (name === 'page') {
         //console.log(JSON.stringify(current));
-        let line = JSON.stringify(current) + '\n';
-        fileWriteStream.write(line, (err) => {
-            if (err) {
-                console.error(err);
-            }
-        });
+        let line = JSON.stringify(current) + os.EOL;
+        fileWriteStream.write(line, 'utf8');
     }
 });
 
