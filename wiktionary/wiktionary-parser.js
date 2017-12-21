@@ -3,7 +3,7 @@ const fs = require('fs'),
     config = require('config'),
     sax = require('sax').createStream(true),
     wiktionary = config.get('wiktionary'),
-    fileReadStream = fs.createReadStream(wiktionary.xml),
+    fileReadStream = fs.createReadStream(wiktionary.xml, {encoding: 'utf8'}),
     fileWriteStream = fs.createWriteStream(wiktionary.json, {encoding: 'utf8'})
     ;
 
@@ -103,9 +103,10 @@ sax.on('attribute', (attr) => {
 sax.on('closetag', (name) => {
     setTagMode(name, false);
     if (name === 'page') {
-        //console.log(JSON.stringify(current));
-        let line = JSON.stringify(current) + os.EOL;
-        fileWriteStream.write(line, 'utf8');
+        //let _text = Buffer.from(current.text).toString('base64');
+        //current.text = _text;
+        let line = JSON.stringify(current) + '\n';
+        fileWriteStream.write(line);
     }
 });
 
