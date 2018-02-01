@@ -10,7 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
     "config": "^1.28.1",
+    "express": "^4.16.2",
+    "puppeteer": "^1.0.0",
     "sax": "^1.2.4"
   }
 }
