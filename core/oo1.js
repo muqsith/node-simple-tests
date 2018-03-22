@@ -1,6 +1,6 @@
 const crypto = require('crypto'),
     util = require('util'),
-    performanceWrapper = require('./performance-wrapper')
+    performanceWrapper = require('performance-wrapper')
     ;
 class DatabaseConnector {
 
