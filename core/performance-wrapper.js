@@ -31,7 +31,8 @@ const applyPerformanceWrapper = (obj, objectName, performanceNotificationCallbac
                 args[callbackFnIndex] = callbackWrapper;
             }
             let originalReturnObject = originalFunction.apply(obj, args);
-            let isPromiseType = originalReturnObject && typeof originalReturnObject.then === 'function';
+            let isPromiseType = (originalReturnObject && typeof originalReturnObject.then === 'function'
+                && typeof originalReturnObject.catch === 'function');
             if (isPromiseType) {
                 originalReturnObject
                 .then((...resolveArgs) => {
