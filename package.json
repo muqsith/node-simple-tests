@@ -12,6 +12,7 @@
     "bcrypt": "^1.0.3",
     "bluebird": "^3.5.1",
     "config": "^1.28.1",
+    "datauri": "^1.1.0",
     "express": "^4.16.2",
     "fs-extra": "^5.0.0",
     "lokijs": "^1.5.3",
@@ -19,6 +20,7 @@
     "performance-wrapper": "^1.0.1",
     "puppeteer": "^1.0.0",
     "sax": "^1.2.4",
+    "sharp": "^0.20.1",
     "text2png": "^1.1.0",
     "updeep": "^1.0.0"
   }

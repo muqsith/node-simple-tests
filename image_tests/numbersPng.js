@@ -11,11 +11,11 @@ const pngenerator = (function () {
     generatePNG: function(text) {
       this.text = text;
       this.buf = text2png(text, {
-        font: '200px Futura',
+        font: '100px Futura',
         textColor: 'teal',
         bgColor: 'linen',
         lineSpacing: 10,
-        padding: 500
+        padding: 30
       });
       return this;
     },
@@ -42,13 +42,13 @@ const pngenerator = (function () {
   return generator;
 })();
 
-
 function generateNumberImages(arr) {
   let e = arr.shift();
   if (e) {
     pngenerator
-    .generatePNG(numbers[e])
-    .savePNG('/home/muqsith/Pictures/numbers/', e)
+    //.generatePNG(numbers[e])
+    .generatePNG(e)
+    .savePNG('/Users/abdulmuqsith/Development/node-simple-tests/image_tests/generated_images', e)
     .then(() => {
       generateNumberImages(arr);
     })
@@ -59,4 +59,5 @@ function generateNumberImages(arr) {
 }
 
 
-generateNumberImages(Array(60).fill(0).map((e,i) => i+1));
+//generateNumberImages(Array(60).fill(0).map((e,i) => i+1));
+generateNumberImages(Array(500).fill(0).map((e, i) => ('Number_' + (i+1))));
