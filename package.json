@@ -20,6 +20,7 @@
     "find-port": "^2.0.1",
     "fs-extra": "^5.0.0",
     "lokijs": "^1.5.3",
+    "mongodb": "^3.0.5",
     "node-png": "^0.4.3",
     "performance-wrapper": "^1.0.6",
     "puppeteer": "^1.0.0",
