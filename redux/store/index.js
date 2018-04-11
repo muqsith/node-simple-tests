@@ -1,6 +1,6 @@
 const { createStore } = require('redux'),
     { readUser } = require('../lib/user.collection'),
-    { OK } = require('../actions/types')
+    { OK, ERROR } = require('../actions/types')
     ;
 /**
  * Store structure
@@ -41,17 +41,21 @@ const { createStore } = require('redux'),
 const getStore = (id) => {
     return (
         new Promise((resolve, reject) => {
-            if (!id) {
-                resolve({data: null, err: null, ...initialState});
-            } else {
-                readUser(id)
-                .then((record) => {
-                    resolve({data: record, err: null, ...initialState});
-                })
-                .catch((err) => {
-                    reject(err);
-                })
-            }
+            Promise.resolve()
+            .then(() => {
+                if (!id) {
+                    return Promise.resolve(null);
+                } else {
+                    return readUser(id);
+                }
+            })
+            .then((record) => {
+                let userStore = {data: record, err: null, ...initialState};
+
+            })
+            .catch((err) => {
+                reject(err);
+            });
         })
     );
 };

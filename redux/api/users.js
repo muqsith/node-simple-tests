@@ -11,7 +11,7 @@ router.post('/', upload.array(), (req, res, next) => {
         data = JSON.parse(req.body.data);
         console.log(data);
         /*
-            getStore()
+            getUserStore()
             .then((store) => {
                 store.dispatch({type: Actions.CREATE, data, req, res});
             })
