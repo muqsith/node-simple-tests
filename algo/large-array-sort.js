@@ -17,13 +17,13 @@ const getNewNode = (value) => {
 }
 
 const addNode = (node, element) => {
-    if (element.key > node.value.key) {
+    if (element.key >= node.value.key) {
         if (node.right === null) {
             node.right = getNewNode(element);
         } else {
             return addNode(node.right, element);
         }
-    } else if (element.key < node.value.key) {
+    } else if (element.key <= node.value.key) {
         if (node.left === null) {
             node.left = getNewNode(element);
         } else {
@@ -50,6 +50,48 @@ const arr = getArrayOfRandomNumbers(200000);
 
 const bTree = getBTree(arr)();
 
+const findKey = (key) => {
+    let previousNode = null;
+    const findNode = (node) => {
+        if (node.value.key === key) {
+            return node;
+        } else if (node.value.key > key) {
+            previousNode = node;
+            if (node.left) {
+                return findNode(node.left);
+            } else {
+                return node;
+            }
+        } else if (node.value.key < key) {
+            previousNode = node;
+            if (node.right) {
+                return findNode(node.right);
+            } else {
+                return node;
+            }
+        }
+    }
+    return findNode;
+}
+
+const findPreviousKey = (key) => {
+    let previousNode = null;
+    const findPreviousNode = (node) => {
+        if (!node) {
+            return previousNode;
+        } if (node.value.key === key) {
+            return previousNode;
+        } else if (node.value.key > key) {
+            previousNode = node;
+            return findPreviousNode(node.left);
+        } else if (node.value.key < key) {
+            previousNode = node;
+            return findPreviousNode(node.right);
+        }
+    }
+    return findPreviousNode;
+}
+
 const findMax = () => {
     let rootNode = bTree, previousNode = null, currentNode = rootNode;
     while (currentNode != null) {
@@ -59,32 +101,14 @@ const findMax = () => {
     return previousNode;
 }
 
-const findMaxButLessThan = (n) => {
-    let previousNode = null;
-    const _findMaxButLessThan = (node) => {
-        if (node !== null) {
-            if (node.value.key > n) {
-                _findMaxButLessThan(node.left);
-            } else if (node.value.key < n) {
-                if (previousNode !== null && previousNode.value.key < node.value.key) {
-                    return previousNode;
-                } else {
-                    _findMaxButLessThan(node.right);
-                }
-            }
-        } else {
-            return previousNode;
-        }
-    }
-    return _findMaxButLessThan;
-}
+
 
 let sortedArray = arr.sort((a, b) => {
     return b.key - a.key;
 });
 
-//console.log(findMax().value.key, sortedArray[0].key);
 const max = findMax().value.key;
-console.log('Max: ', max);
-const nMax = findMaxButLessThan(max)(bTree);
-console.log(nMax, sortedArray[1].key);
+console.log('Max: ', max, sortedArray[0].key);
+
+console.log(findKey(sortedArray[0].key)(bTree).value.key, 
+    findPreviousKey(sortedArray[0].key)(bTree).value.key);
