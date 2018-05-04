@@ -16,8 +16,9 @@ const resource = {
     location: 'Office'
 };
 
+const getStore = () => {
+    return createStore(personApp, resource);
+}
 
-const store = createStore(personApp, resource);
-
-module.exports = store;
+module.exports = { getStore };
 

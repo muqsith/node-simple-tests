@@ -1,5 +1,7 @@
-const store =  require('./store');
+const { getStore } =  require('./store');
 const { addAge } = require('./actions');
+
+const store = getStore();
 
 console.log('Initial state: ', store.getState());
 
