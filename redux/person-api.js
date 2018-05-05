@@ -4,13 +4,24 @@ const express = require('express'),
     { addAge, changeLocation } = require('./actions')
     ;
 
-const subscribeResponseToStore = (store, res) => {
-    store.subscribe(() => {
-        res.send(store.getState());
+const subscribeResponseToStore = (store, res, processState) => {
+    let unsubscribe = null;
+    if (typeof processState === 'function') {
+        unsubscribe = store.subscribe(() => {
+            processState(store.getState(), res);
+        });
+    } else {
+        unsubscribe = store.subscribe(() => {
+            res.send(store.getState());
+        });
+    }   
+    res.on('finish', () => {
+        unsubscribe();
+        console.log('Unsubscribed ...');
     });
 }
 
-router.get('/add-age/:age', (req, res) => {
+router.get('/add-age/:age', (req, res, next) => {
     let age = +req.params.age;
     getStore()
     .then((store) => {
@@ -23,11 +34,13 @@ router.get('/add-age/:age', (req, res) => {
     ;
 });
 
-router.get('/change-location/:location', (req, res) => {
+router.get('/change-location/:location', (req, res, next) => {
     let location = req.params.location;
     getStore()
     .then((store) => {
-        subscribeResponseToStore(store, res);
+        subscribeResponseToStore(store, res, (state, res) => {
+            res.send(state.location);
+        });
         store.dispatch(changeLocation(location));
     })
     .catch((err) => {

@@ -38,7 +38,7 @@ const getStore = () => {
                         record, 
                         applyMiddleware(
                             thunkMiddleware
-                            , loggerMiddleware
+                            //, loggerMiddleware
                             )
                         );
                 resolve(store);
