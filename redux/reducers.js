@@ -1,4 +1,4 @@
-const { ADD_AGE } = require('./action-types');
+const { ADD_AGE, CHANGE_LOCATION } = require('./action-types');
 
 let control_count = 0;
 
@@ -15,6 +15,9 @@ exports.personApp = (state = getInitialState(), action) => {
     switch (action.type) {
         case ADD_AGE: {
             return { ...state, age: state.age + action.age };
+        }
+        case CHANGE_LOCATION: {
+            return { ...state, location: action.location };
         }
         default: return state;
     }

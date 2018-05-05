@@ -7,7 +7,7 @@ expressApp.use((req, res, next) => {
     console.log('<==== Response ...');
 });
 
-expressApp.use('/api/age', require('./age-api'));
+expressApp.use('/api/person', require('./person-api'));
 
 expressApp.listen(9193, (err) => {
     if (err) {

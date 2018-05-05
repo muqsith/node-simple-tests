@@ -1,5 +1,8 @@
-const { createStore } = require('redux');
+const { createStore, applyMiddleware } = require('redux');
+const thunkMiddleware = require('redux-thunk').default;
+const { createLogger } = require('redux-logger');
 
+const loggerMiddleware = createLogger();
 
 
 // We must know what we serve, even the minutest details of JSON in a service
@@ -8,16 +11,44 @@ const { createStore } = require('redux');
 
 const { personApp } = require('./reducers');
 
-
-// Below object is assumed to be a database record.
-const resource = {
-    name: 'Muqsith',
-    age: 32,
-    location: 'Office'
-};
+const getUserRecord = (id) => {
+    return (
+        new Promise((resolve, reject) => {
+            // Below object is assumed to be a database record.
+            const resource = {
+                id: 1001,
+                name: 'Muqsith',
+                age: 32,
+                location: 'Office'
+            };
+            setTimeout(() => {
+                resolve(resource);
+            }, 200);
+        })
+    );
+}
 
 const getStore = () => {
-    return createStore(personApp, resource);
+    return (
+        new Promise((resolve, reject) => {
+            getUserRecord(1001)
+            .then((record) => {
+                let store = createStore(
+                        personApp, 
+                        record, 
+                        applyMiddleware(
+                            thunkMiddleware
+                            , loggerMiddleware
+                            )
+                        );
+                resolve(store);
+            })
+            .catch((err) => {
+                console.log(err);
+                reject(err)
+            });
+        })
+    )
 }
 
 module.exports = { getStore };

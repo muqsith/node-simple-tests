@@ -1,1 +1,3 @@
+exports.ERROR = 'ERROR';
 exports.ADD_AGE = 'ADD_AGE';
+exports.CHANGE_LOCATION = 'CHANGE_LOCATION';
