@@ -10,6 +10,8 @@ bufferStream.end(buf);
 const form = new FormData();
 form.append('field', 'file');
 form.append('file', bufferStream, { filename: 'dummy.txt', contentType: 'text/plain' });
+// It even works with just buffer (buf)
+// form.append('file', buf, { filename: 'dummy.txt', contentType: 'text/plain' });
 form.append('type', 'text/plain');
 form.append('size', SIZE);
 
