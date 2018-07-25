@@ -11,7 +11,7 @@ const getPromise = (function () {
                 setTimeout(() => {
                     console.log(j);
                     resolve(j);
-                }, 100);
+                }, 1000);
             })
         );
     };
