@@ -3,3 +3,5 @@ node_modules/
 package-lock.json
 npm-debug.log*
 image_tests/generated_images/
+server/express/ejs-test/views/
+server/express/ejs-test/public/
