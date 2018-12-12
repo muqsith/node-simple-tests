@@ -40,6 +40,7 @@
     "sax": "^1.2.4",
     "sharp": "^0.20.1",
     "sinon": "^5.0.10",
+    "streaming-line-reader": "^1.0.1",
     "text2png": "^1.1.0",
     "through2": "^3.0.0",
     "updeep": "^1.0.0",
