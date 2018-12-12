@@ -5,3 +5,4 @@ npm-debug.log*
 image_tests/generated_images/
 server/express/ejs-test/views/
 server/express/ejs-test/public/
+logs/
