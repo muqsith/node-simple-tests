@@ -82,7 +82,13 @@ async function _main() {
         const memcachedReader = new MemcachedReader(memcached);
         keyStream.pipe(memcachedReader);
         memcachedReader.on('finish', () => {
-            memcached.end();
+            memcached.flush((err, result) => {
+                if (err) console.log(err)
+                else {
+                    console.log('Flush result: ', JSON.stringify(result));
+                    memcached.end();
+                }
+            });
         });
     });
 }
