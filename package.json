@@ -43,7 +43,7 @@
     "sharp": "^0.20.1",
     "sinon": "^5.0.10",
     "sqlite3": "^4.0.4",
-    "streaming-line-reader": "^1.0.3",
+    "streaming-line-reader": "^1.0.4",
     "text2png": "^1.1.0",
     "through2": "^3.0.0",
     "updeep": "^1.0.0",
