@@ -12,11 +12,7 @@ const isOperator = (op) => /[+,\-,*,\/,−,×,÷]{1}/.test(op);
 
 function calculate(arr) {
     const e = arr.pop();
-    if (isOperator(e)) {
-        return operatorMap[e](calculate(arr), calculate(arr));
-    } else {
-        return +e;
-    }
+    return (isOperator(e)) ? operatorMap[e](calculate(arr), calculate(arr)) : (+e);
 }
 
 function rpn (input) {
@@ -24,5 +20,13 @@ function rpn (input) {
     return calculate(arr);
 }
 
-const result = rpn('3 4 5 × −');
+let input = process.argv[2];
+if (input) {
+    console.log('Input: ', input);
+} else {
+    console.log('No input provided');
+    console.log(`Processing default input: '3 4 5 × −'`);
+    input = '3 4 5 × −';
+}
+const result = rpn(input);
 console.log(result);
