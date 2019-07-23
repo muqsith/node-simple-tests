@@ -8,3 +8,4 @@ server/express/ejs-test/public/
 logs/
 thor
 all-domains.json
+.nvmrc
