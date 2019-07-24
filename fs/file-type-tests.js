@@ -1,38 +1,54 @@
 const fs = require('fs');
-const { PassThrough } = require('stream');
+const { Transform, PassThrough } = require('stream');
 
 const fileType = require('file-type');
 
-// const inFile = '/home/mui/Downloads/GIF_22-umavi.gif-for-web-normal.gif';
-// const outFile = '/home/mui/Downloads/out.gif';
+// const inFile = '/home/mui/Pictures/22-umavi.gif-for-web-normal.gif';
+// const outFile = '/home/mui/Downloads/out.jpg';
 
-const inFile = '/home/mui/Downloads/10.png';
+const inFile = '/home/mui/Pictures/high-res-images/10.png';
 const outFile = '/home/mui/Downloads/out.png';
-const outFile2 = '/home/mui/Downloads/out2.png';
 
 const readStream = fs.createReadStream(inFile);
-//const writeStream = fs.createWriteStream(outFile);
+const writeStream = fs.createWriteStream(outFile);
+writeStream.on('close', () => {
+    console.log('Image file type: ', imageFileType);
+});
 
+let imageFileType = '';
 
-const p1 = new PassThrough();
-const p2 = new PassThrough();
+class CheckFileTypeInStream extends Transform {
+    constructor(options) {
+        super(options);
+        this.chunksList = [];
+        this.getChunksTotalSize = this.getChunksTotalSize.bind(this);
+        this.getFullChunk = this.getFullChunk.bind(this);
+    }
 
-// console.log(fileType.minimumBytes);
+    getChunksTotalSize() {
+        return this.chunksList.reduce((acc, buf) => {
+            return acc + buf.length;
+        }, 0);
+    }
 
-// readStream.once('data', (d) => {
+    getFullChunk() {
+        return Buffer.concat(this.chunksList, this.getChunksTotalSize());
+    }
 
-//     console.log(d, d.length);
-// });
+    _transform(chunk, encoding, callback) {
+        if (!imageFileType) {
+            this.chunksList.push(chunk);
+            if (this.getChunksTotalSize() >= fileType.minimumBytes) {
+                const fullChunk = this.getFullChunk();
+                imageFileType = fileType(fullChunk);
+                this.chunksList = [];
+            }
+        }
 
-// readStream.on('data', (d) => {
-//     console.log(d, d.length);
-// });
+        callback(null, chunk);
+    }
+}
 
-//const chunk = readStream.read(fileType.minimumBytes);
-// console.log(fileType(chunk));
-// readStream.unshift(chunk);
-// readStream.pipe(writeStream);
+const checkFileTypeInStream = new CheckFileTypeInStream();
 
-
-readStream.pipe(p1);
-readStream.pipe(fs.createWriteStream(outFile2));
+readStream.pipe(checkFileTypeInStream).pipe(writeStream);
