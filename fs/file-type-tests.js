@@ -10,12 +10,7 @@ const inFile = '/home/mui/Pictures/high-res-images/10.png';
 const outFile = '/home/mui/Downloads/out.png';
 
 const readStream = fs.createReadStream(inFile);
-const writeStream = fs.createWriteStream(outFile);
-writeStream.on('close', () => {
-    console.log('Image file type: ', imageFileType);
-});
 
-let imageFileType = '';
 
 class CheckFileTypeInStream extends Transform {
     constructor(options) {
@@ -23,6 +18,7 @@ class CheckFileTypeInStream extends Transform {
         this.chunksList = [];
         this.getChunksTotalSize = this.getChunksTotalSize.bind(this);
         this.getFullChunk = this.getFullChunk.bind(this);
+        this.imageFileType = null;
     }
 
     getChunksTotalSize() {
@@ -36,11 +32,11 @@ class CheckFileTypeInStream extends Transform {
     }
 
     _transform(chunk, encoding, callback) {
-        if (!imageFileType) {
+        if (!this.imageFileType) {
             this.chunksList.push(chunk);
             if (this.getChunksTotalSize() >= fileType.minimumBytes) {
                 const fullChunk = this.getFullChunk();
-                imageFileType = fileType(fullChunk);
+                this.imageFileType = fileType(fullChunk);
                 this.chunksList = [];
             }
         }
@@ -50,5 +46,10 @@ class CheckFileTypeInStream extends Transform {
 }
 
 const checkFileTypeInStream = new CheckFileTypeInStream();
+
+const writeStream = fs.createWriteStream(outFile);
+writeStream.on('close', () => {
+    console.log('Image file type: ', checkFileTypeInStream.imageFileType);
+});
 
 readStream.pipe(checkFileTypeInStream).pipe(writeStream);
