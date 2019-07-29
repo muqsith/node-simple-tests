@@ -1,43 +1,37 @@
 const sample = [
     [3, 4, 5, 6, 7],
-    [1, 2, 3, 4, 5],
+    [1, 2, 3, 4, 51, 52, 53],
     [0, 1, 2, 9],
-    [4, 5, 18],
-    [2, 3, 5, 7, 9, 11]
+    [401, 501, 601, 701, 801, 901, 1001, 2001, 3001],
+    [2, 3, 5, 7, 9, 17],
+    [0, 13]
 ];
 
 const result = [];
 
 const positions = Array(sample.length).fill(0);
 
-let number, current, min;
-
-let __row = 0;
-
-let n = 0;
-
-const numbers = [];
-
+let min, number, __row;
 
 do {
-    number = sample[__row][positions[__row]];
-    __row = 0;
+    number = undefined;
     for (let row = 0; row < sample.length; row += 1) {
-        current = sample[row][positions[row]];
-        if (typeof current !== 'undefined' && current < number) {
-            number = current;
+        if (positions[row] < sample[row].length) {
+            number = sample[row][positions[row]];
             __row = row;
+            for (let r = 0; r < sample.length; r += 1) {
+                if (positions[r] < sample[r].length) {
+                    min = sample[r][positions[r]];
+                    if (min < number) {
+                        number = min;
+                        __row = r;
+                    }
+                }
+            }
+            positions[__row] += 1;
+            result.push(number);
         }
     }
-    min = sample[__row][positions[__row]];
-    if (typeof min !== 'undefined') {
-        result.push(min);
-    }
-    if (__row < sample.length) {
-        positions[__row] += 1;
-    }
-    n += 1;
-} while(n < 1000); //while ((typeof min !== 'undefined'));
+} while (typeof number !== 'undefined');
 
-console.log(numbers);
 console.log(result);
