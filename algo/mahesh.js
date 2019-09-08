@@ -19,4 +19,4 @@ const sample2 = [
 ];
 
 
-console.log(getResult(sample2, 1));
+console.log(getResult(sample2, 4));
