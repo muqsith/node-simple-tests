@@ -4,7 +4,7 @@ const sample = [
     [0, 1, 2, 9],
     [401, 501, 601, 701, 801],
     [2, 3, 5, 7, 9, 17],
-    [0, 13]
+    [0, 13, 701, 901]
 ];
 
 const kwayMerge = (data) => {
@@ -17,16 +17,32 @@ const kwayMerge = (data) => {
         ptrs.push(0);
     }
 
-    while (its < 10000) {
-        for (let i = 0; i < sample.length; i += 1) {
-            let n = sample[i][ptrs[i]];
-
+    while (its < 100) {
+        let num, n;
+        let position = 0;
+        for (let i = position; i < sample.length; i += 1) {
+            n = sample[i][ptrs[i]];
+            if (!isNaN(n)) {
+                if (typeof num === 'undefined') {
+                    num = n;
+                }
+                if (n <= num) {
+                    num = n;
+                    position = i;
+                }
+            }
         }
+
+        ptrs[position] += 1;
+        if (typeof num === 'undefined') {
+            break;
+        }
+        result.push(num);
+
         its += 1;
     }
 
     return result;
 };
-
 
 console.log(kwayMerge(sample));
