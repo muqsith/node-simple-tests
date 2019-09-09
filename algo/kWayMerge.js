@@ -8,12 +8,13 @@ const sample = [
 ];
 
 const kwayMerge = (data) => {
+    if (!Array.isArray(data) && data.length === 0) {
+        return;
+    }
+
     const result = []
 
-    const ptrs = [];
-    for (let i = 0; i < data.length; i += 1) {
-        ptrs.push(0);
-    }
+    const ptrs = new Array(data.length).fill(0);
 
     while (true) {
         let num, n;
