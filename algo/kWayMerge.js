@@ -13,15 +13,15 @@ const kwayMerge = (data) => {
     const result = []
 
     const ptrs = [];
-    for (let i = 0; i < sample.length; i += 1) {
+    for (let i = 0; i < data.length; i += 1) {
         ptrs.push(0);
     }
 
     while (its < 100) {
         let num, n;
         let position = 0;
-        for (let i = position; i < sample.length; i += 1) {
-            n = sample[i][ptrs[i]];
+        for (let i = position; i < data.length; i += 1) {
+            n = data[i][ptrs[i]];
             if (!isNaN(n)) {
                 if (typeof num === 'undefined') {
                     num = n;
