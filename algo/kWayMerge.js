@@ -14,29 +14,29 @@ const kwayMerge = (data) => {
 
     const result = []
 
-    const ptrs = new Array(data.length).fill(0);
+    const arrayIndexPointers = new Array(data.length).fill(0);
 
     while (true) {
-        let num, n;
-        let position = 0;
-        for (let i = position; i < data.length; i += 1) {
-            n = data[i][ptrs[i]];
-            if (!isNaN(n)) {
-                if (typeof num === 'undefined') {
-                    num = n;
+        let smallestInRow, currentNumber;
+        let arrayIndexPointerPosition = 0;
+        for (let i = arrayIndexPointerPosition; i < data.length; i += 1) {
+            currentNumber = data[i][arrayIndexPointers[i]];
+            if (!isNaN(currentNumber)) {
+                if (typeof smallestInRow === 'undefined') {
+                    smallestInRow = currentNumber;
                 }
-                if (n <= num) {
-                    num = n;
-                    position = i;
+                if (currentNumber <= smallestInRow) {
+                    smallestInRow = currentNumber;
+                    arrayIndexPointerPosition = i;
                 }
             }
         }
 
-        ptrs[position] += 1;
-        if (typeof num === 'undefined') {
+        arrayIndexPointers[arrayIndexPointerPosition] += 1;
+        if (typeof smallestInRow === 'undefined') {
             break;
         }
-        result.push(num);
+        result.push(smallestInRow);
     }
 
     return result;
