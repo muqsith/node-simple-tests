@@ -8,8 +8,6 @@ const sample = [
 ];
 
 const kwayMerge = (data) => {
-    let its = 0;
-
     const result = []
 
     const ptrs = [];
@@ -17,7 +15,7 @@ const kwayMerge = (data) => {
         ptrs.push(0);
     }
 
-    while (its < 100) {
+    while (true) {
         let num, n;
         let position = 0;
         for (let i = position; i < data.length; i += 1) {
@@ -38,8 +36,6 @@ const kwayMerge = (data) => {
             break;
         }
         result.push(num);
-
-        its += 1;
     }
 
     return result;
