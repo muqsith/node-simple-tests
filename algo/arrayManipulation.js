@@ -2,33 +2,35 @@
 
 function arrayManipulation(n, queries) {
     let max = 0;
-    const numbersMap = queries.reduce((acc, query) => {
+
+    const m = queries.reduce((acc, query) => {
         const a = query[0];
         const b = query[1];
-        acc[a] = 0;
-        acc[b] = 0;
+        const k = query[2];
+        if (typeof acc[a] === 'undefined') {
+            acc[a] = 0;
+        }
+
+        if (typeof acc[b+1] === 'undefined') {
+            acc[b+1] = 0;
+        }
+        acc[a] += k;
+        acc[b+1] += -k;
         return acc;
     }, {});
 
-    for (let i = 0; i < queries.length; i += 1) {
-        const query = queries[i];
-        const a = query[0];
-        const b = query[1];
-
-        const k = query[2];
-
-         Object.keys(numbersMap).forEach((key) => {
-            if (key >= a && key <= b) {
-                numbersMap[key] += k;
-            }
-        });
+    const array = Array(n).fill(0);
+    let s = 0;
+    for (let i = 0; i <= n; i += 1) {
+        if (typeof m[i] !== 'undefined') {
+            s += m[i]
+        }
+        array[i] = s;
+        if (max < array[i]) {
+            max = array[i];
+        }
     }
 
-    Object.keys(numbersMap).forEach((key) => {
-        if (max < numbersMap[key]) {
-            max = numbersMap[key];
-        }
-    });
-
     return max;
+
 }
