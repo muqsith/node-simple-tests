@@ -4,7 +4,7 @@ const net = require('net');
 
 const options = {
     port: 24224,
-    host: process.env.IPADDR,
+    host: '172.17.0.1',
     exclusive: true
 }
 
