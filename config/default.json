@@ -2,5 +2,6 @@
     "wiktionary" : {
         "xml": "/Users/muqsithirfan/Development/data/wiktionary/enwiktionary-20171120-pages-articles.xml",
         "json": "/Users/muqsithirfan/Development/data/wiktionary/enwiktionary-20171120-pages-articles.json"
-    }
+    },
+    "logfile": "/home/muqsith/Downloads/best.log"
 }
