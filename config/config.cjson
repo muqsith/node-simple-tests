@@ -1,0 +1,21 @@
+{
+  "#include": [
+    "development.cjson"
+  ],
+  "webspace": {
+    "mediafolder#public": "webshopmedia",
+    "url": {
+      "local": "http://webspace"
+    },
+    "resolveCname": true,
+    "impro": {
+      "cacheSizes": {
+        "local": [
+          2920,
+          760,
+          380
+        ]
+      }
+    }
+  }
+}

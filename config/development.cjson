@@ -1,0 +1,24 @@
+{
+  "#include": [
+    "production.cjson"
+  ],
+  "webspace": {
+    "mediafolder#public": "webshopmedia",
+    "url": {
+      "local": "http://localhost"
+    },
+    "resolveCname": true,
+    "impro": {
+      "url": {
+        "local": "http://localhost/____impro/1/"
+      },
+      "cacheSizes": {
+        "local": [
+          7920,
+          560,
+          680
+        ]
+      }
+    }
+  }
+}

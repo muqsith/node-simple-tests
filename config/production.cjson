@@ -1,0 +1,21 @@
+{
+  "webspace": {
+    "mediafolder#public": "webshopmedia",
+    "url": {
+      "production": "https://{domainName}.onedav.service.one.com:8888/data/httpd.www/"
+    },
+    "resolveCname": true,
+    "impro": {
+      "url": {
+        "production": "http://{domainName}/____impro/1/"
+      },
+      "cacheSizes": {
+        "production": [
+          1920,
+          960,
+          480
+        ]
+      }
+    }
+  }
+}
