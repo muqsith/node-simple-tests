@@ -15,7 +15,7 @@ const pngenerator = (function () {
         textColor: 'teal',
         bgColor: 'linen',
         lineSpacing: 10,
-        padding: 30
+        padding: 400
       });
       return this;
     },
@@ -46,9 +46,9 @@ function generateNumberImages(arr) {
   let e = arr.shift();
   if (e) {
     pngenerator
-    //.generatePNG(numbers[e])
-    .generatePNG(e)
-    .savePNG('/Users/abdulmuqsith/Development/node-simple-tests/image_tests/generated_images', e)
+      .generatePNG(numbers[e])
+      //.generatePNG(e)
+      .savePNG('/home/mui/Downloads/numbers', e)
     .then(() => {
       generateNumberImages(arr);
     })
@@ -59,5 +59,5 @@ function generateNumberImages(arr) {
 }
 
 
-//generateNumberImages(Array(60).fill(0).map((e,i) => i+1));
-generateNumberImages(Array(500).fill(0).map((e, i) => ('Number_' + (i+1))));
+generateNumberImages(Array(60).fill(0).map((e, i) => i + 1));
+//generateNumberImages(Array(30).fill(0).map((e, i) => ('Number_' + (i + 1))));
