@@ -53,21 +53,34 @@ class Utility {
   }
 
   async start(ids) {
-    while (ids.length > 0) {
-      console.log("i am here");
-      if (this.currentGetRequests < 10) {
-        const id = ids.shift();
-        this.currentGetRequests += 1;
-        const result = await performGet(id);
-        this.processFn(result);
-        this.results.push(result);
-        this.currentGetRequests -= 1;
+    while (ids.length > 0 || this.results.length > 0) {
+      if (ids.length > 0 && this.currentGetRequests < this.maxGet) {
+        const idsToTake = this.maxGet - this.currentGetRequests;
+        const getRequestPromises = [];
+        for (let i = 0; i < idsToTake; i += 1) {
+          const id = ids.shift();
+          getRequestPromises.push(performGet(id));
+        }
+        this.currentGetRequests += idsToTake;
+        const getRequestResults = await Promise.all(getRequestPromises);
+        for (let i = 0; i < getRequestResults.length; i += 1) {
+          const result = getRequestResults[i];
+          this.processFn(result);
+          this.results.push(result);
+        }
+        this.currentGetRequests -= idsToTake;
       }
-      if (this.results.length > 0 && this.currentPutRequests < 2) {
-        const result = this.results.shift();
-        this.currentPutRequests += 1;
-        await performPut(result);
-        this.currentPutRequests -= 1;
+
+      if (this.results.length > 0 && this.currentPutRequests < this.maxPut) {
+        const resultsToTake = this.maxPut - this.currentPutRequests;
+        const putRequestPromises = [];
+        for (let i = 0; i < resultsToTake; i += 1) {
+          const result = this.results.shift();
+          putRequestPromises.push(performPut(result));
+        }
+        this.currentPutRequests += resultsToTake;
+        await Promise.all(putRequestPromises);
+        this.currentPutRequests -= resultsToTake;
       }
     }
   }
