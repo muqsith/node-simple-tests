@@ -24,7 +24,7 @@ utility.start([1, 2, 3, 4, ... , 499, 500]);
 
 const performGet = (num) => {
   return new Promise((resolve, reject) => {
-    console.log(`getting id ${num} ...`);
+    console.log(`getting <<<<<<<<<<<<<<<<<<<<< id ${num} ...`);
     setTimeout(() => {
       resolve({ id: num });
     }, 100);
@@ -33,7 +33,7 @@ const performGet = (num) => {
 
 const performPut = (o) => {
   return new Promise((resolve, reject) => {
-    console.log(`putting id ${o.id} ...`);
+    console.log(`putting >>>>>>>>>>> id ${o.id} ...`);
     setTimeout(() => {
       resolve(o);
     }, 100);
@@ -72,15 +72,20 @@ class Utility {
       }
 
       if (this.results.length > 0 && this.currentPutRequests < this.maxPut) {
-        const resultsToTake = this.maxPut - this.currentPutRequests;
+        let resultsToTake = this.maxPut - this.currentPutRequests;
+        if (this.results.length < resultsToTake) {
+          resultsToTake = this.results.length;
+        }
         const putRequestPromises = [];
         for (let i = 0; i < resultsToTake; i += 1) {
           const result = this.results.shift();
           putRequestPromises.push(performPut(result));
         }
-        this.currentPutRequests += resultsToTake;
-        await Promise.all(putRequestPromises);
-        this.currentPutRequests -= resultsToTake;
+        if (putRequestPromises.length > 0) {
+          this.currentPutRequests += resultsToTake;
+          await Promise.all(putRequestPromises);
+          this.currentPutRequests -= resultsToTake;
+        }
       }
     }
   }
