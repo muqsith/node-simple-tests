@@ -27,16 +27,16 @@ const performGet = (num) => {
     console.log(`getting <<<<<<<<<<<<<<<<<<<<< id ${num} ...`);
     setTimeout(() => {
       resolve({ id: num });
-    }, 100);
+    }, 10);
   });
 };
 
 const performPut = (o) => {
   return new Promise((resolve, reject) => {
-    console.log(`putting >>>>>>>>>>> id ${o.id} ...`);
+    console.log(`putting >>>>>>>>>>> id ${o.id} - ${o.processed} ...`);
     setTimeout(() => {
       resolve(o);
-    }, 100);
+    }, 50);
   });
 };
 
@@ -55,7 +55,10 @@ class Utility {
   async start(ids) {
     while (ids.length > 0 || this.results.length > 0) {
       if (ids.length > 0 && this.currentGetRequests < this.maxGet) {
-        const idsToTake = this.maxGet - this.currentGetRequests;
+        let idsToTake = this.maxGet - this.currentGetRequests;
+        if (ids.length < idsToTake) {
+          idsToTake = ids.length;
+        }
         const getRequestPromises = [];
         for (let i = 0; i < idsToTake; i += 1) {
           const id = ids.shift();
