@@ -40,6 +40,12 @@ const performPut = (o) => {
   });
 };
 
+const delay = (t = 1) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, t);
+  });
+};
+
 class Utility {
   constructor(options) {
     this.url = options.url;
@@ -50,18 +56,20 @@ class Utility {
     this.currentGetRequests = 0;
     this.currentPutRequests = 0;
     this.results = [];
+    this.ids = [];
   }
 
-  async start(ids) {
-    while (ids.length > 0 || this.results.length > 0) {
-      if (ids.length > 0 && this.currentGetRequests < this.maxGet) {
+  async doGet() {
+    while (this.ids.length > 0) {
+      await delay();
+      if (this.ids.length > 0 && this.currentGetRequests < this.maxGet) {
         let idsToTake = this.maxGet - this.currentGetRequests;
-        if (ids.length < idsToTake) {
-          idsToTake = ids.length;
+        if (this.ids.length < idsToTake) {
+          idsToTake = this.ids.length;
         }
         const getRequestPromises = [];
         for (let i = 0; i < idsToTake; i += 1) {
-          const id = ids.shift();
+          const id = this.ids.shift();
           getRequestPromises.push(performGet(id));
         }
         this.currentGetRequests += idsToTake;
@@ -73,7 +81,12 @@ class Utility {
         }
         this.currentGetRequests -= idsToTake;
       }
+    }
+  }
 
+  async doPut() {
+    while (this.ids.length > 0 || this.results.length > 0) {
+      await delay();
       if (this.results.length > 0 && this.currentPutRequests < this.maxPut) {
         let resultsToTake = this.maxPut - this.currentPutRequests;
         if (this.results.length < resultsToTake) {
@@ -91,6 +104,13 @@ class Utility {
         }
       }
     }
+  }
+
+  async start(ids) {
+    this.ids = ids;
+    this.results = [];
+
+    await Promise.all([this.doGet(), this.doPut()]);
   }
 }
 
