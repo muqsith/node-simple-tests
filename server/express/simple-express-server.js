@@ -6,8 +6,8 @@ const app = express();
 app.use(express.json());
 
 app.use((req, res, next) => {
+  console.log("request headers: ", req.headers);
   console.log("====> Request ...");
-  debugger;
   next();
   console.log("<==== Response ...");
 });
