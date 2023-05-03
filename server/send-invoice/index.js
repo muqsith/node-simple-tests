@@ -14,7 +14,7 @@ app.post("/paid-event-listener", async (req, res) => {
   const { orderId } = req?.body;
   console.log(`
     >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    Received request for order with id: ${orderId} at ${new Date()}
+    Received request for order-paid-event with id: ${orderId} at ${new Date()}
   `);
   await sendInvoice(orderId);
   return res.status(200).send({ status: "ok" });
