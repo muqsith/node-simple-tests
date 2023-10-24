@@ -1,6 +1,6 @@
 // Tower of Hanoi, Lucas Tower, Brhamas Tower
 
-let src = [1,2,3];
+let src = [1, 2, 3];
 let dest = [];
 let aux = [];
 
@@ -24,6 +24,4 @@ let aux = [];
     src[0] -> dest[2]
  */
 
- function toh (src, dest, aux) {
-
- }
+function toh(src, dest, aux) {}

@@ -1,11 +1,10 @@
 {
-    "extends": "@tsconfig/node14/tsconfig.json",
-    "include": ["./**/*.ts"],
-    "compilerOptions": {
-      "sourceMap": true,
-      "noImplicitAny": false,
-      "strictNullChecks": false,
-      "outDir": "/dev/null"
-    }
+  "extends": "@tsconfig/node14/tsconfig.json",
+  "include": ["./**/*.ts"],
+  "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "outDir": "/dev/null"
   }
-  
+}

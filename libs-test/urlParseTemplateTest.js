@@ -1,10 +1,10 @@
-const urlParseTemplate = require('urlparse-template');
+const urlParseTemplate = require("urlparse-template");
 
-const smtpUrl = 'smtp://user%40{domainName}:password@mail.server.com:25/'
+const smtpUrl = "smtp://user%40{domainName}:password@mail.server.com:25/";
 
 const smtpUrlTemplate = urlParseTemplate(smtpUrl);
 
-const finalUrl = smtpUrlTemplate({domainName: 'mydomain.com'});
+const finalUrl = smtpUrlTemplate({ domainName: "mydomain.com" });
 
 console.log(finalUrl);
 

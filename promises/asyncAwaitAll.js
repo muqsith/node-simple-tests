@@ -1,14 +1,11 @@
 const printWithDelay = (timeout = 500) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-
-        }, timeout);
-    })
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {}, timeout);
+  });
 };
 
-
 async function test() {
-    const p1 = getPromise();
+  const p1 = getPromise();
 }
 
 test();

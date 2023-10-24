@@ -1,6 +1,6 @@
 export const getTimestampWithSecondsAdded = (
   timestamp: string,
-  secs: number
+  secs: number,
 ): string => {
   let result = null;
   if (timestamp && secs) {
@@ -22,7 +22,7 @@ export const getTimestamp = (millis: number): string => {
 
 export const isTimestamp1LessthanTimestamp2 = (
   t1: string,
-  t2: string
+  t2: string,
 ): boolean => {
   let result = false;
   if (t1 && t2) {
@@ -35,7 +35,7 @@ export const isTimestamp1LessthanTimestamp2 = (
 
 export const isTimestamp1LessthanOrEqualToTimestamp2 = (
   t1: string,
-  t2: string
+  t2: string,
 ): boolean => {
   let result = false;
   if (t1 && t2) {

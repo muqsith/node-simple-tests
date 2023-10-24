@@ -1,6 +1,5 @@
-
 const test = () => {
-    console.log(arguments);
-}
+  console.log(arguments);
+};
 
 test();

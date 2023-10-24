@@ -127,5 +127,5 @@ const utility = new Utility({
 utility.start(
   Array(100)
     .fill(0)
-    .map((n, i) => i)
+    .map((n, i) => i),
 );

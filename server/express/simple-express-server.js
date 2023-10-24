@@ -12,7 +12,7 @@ app.use(
     credentials: true,
     allowedHeaders:
       "Origin,Content-Type,Content-Length,Authorization,Accept,X-Requested-With",
-  })
+  }),
 );
 
 app.use(express.json());
@@ -58,7 +58,7 @@ app.get("/get-cookie", (req, res) => {
       httpOnly: true,
       sameSite: "none",
       secure: true,
-    }
+    },
   );
   return res.status(200).send("ok");
 });

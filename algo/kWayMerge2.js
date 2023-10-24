@@ -1,9 +1,8 @@
 const sample = [
   [1, 5, 5, 8],
   [2, 6, 6, 9, 13],
-  [3, 4, 4, 7, 20]
+  [3, 4, 4, 7, 20],
 ];
-
 
 const arrayPtrs = sample.map(() => 0);
 
@@ -15,10 +14,7 @@ let c = 0;
 // first value
 let n = sample[colIndex][arrayPtrs[colIndex]];
 
-
-for (; colIndex < sample.length;) {
-
-
+for (; colIndex < sample.length; ) {
   c += 1;
   if (c === 100) {
     break;
@@ -48,9 +44,6 @@ for (; colIndex < sample.length;) {
   } else {
     colIndex += 1;
   }
-
-
 }
 
 console.log(sorted);
-

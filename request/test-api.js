@@ -20,12 +20,12 @@ const makeRequest = async () => {
     const response = await axios(config);
     await fs.appendFile(
       logFilePath,
-      `\n${new Date()} - Response code: ${response.status}`
+      `\n${new Date()} - Response code: ${response.status}`,
     );
   } catch (err) {
     await fs.appendFile(
       logFilePath,
-      `\n${new Date()} - Error Response code: ${err.response.status} ${err}`
+      `\n${new Date()} - Error Response code: ${err.response.status} ${err}`,
     );
   }
 };

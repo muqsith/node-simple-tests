@@ -7,7 +7,7 @@ function test_resolve() {
   console.log("p2: ", p2);
 
   let basename = path.basename(
-    path.resolve(__dirname, "simple-path-method.js")
+    path.resolve(__dirname, "simple-path-method.js"),
   );
   console.log("basename", basename);
 

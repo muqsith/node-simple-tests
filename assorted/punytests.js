@@ -1,4 +1,4 @@
-const punycode = require('punycode');
+const punycode = require("punycode");
 
-const domainName = 'økoøl.dk';
-console.log(`${domainName} - ${punycode.toASCII(domainName)}`)
+const domainName = "økoøl.dk";
+console.log(`${domainName} - ${punycode.toASCII(domainName)}`);

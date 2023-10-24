@@ -1,7 +1,6 @@
-
 module.exports = {
-  area: (l,b) => l*b,
-  perimeter: (l,b) => 2 * (l+b)
+  area: (l, b) => l * b,
+  perimeter: (l, b) => 2 * (l + b),
 };
 
 console.log(module.exports === exports);

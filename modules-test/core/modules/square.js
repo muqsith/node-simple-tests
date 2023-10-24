@@ -1,4 +1,3 @@
-
 console.log(module.parent);
 
 exports.area = (s) => s * s;

@@ -21,7 +21,7 @@ const run = async () => {
     "..",
     "tmp",
     "write-to-top-tests",
-    "somefile.txt"
+    "somefile.txt",
   );
   const dirPath = pathModule.dirname(filePath);
   await fs.ensureDir(dirPath);
@@ -31,7 +31,7 @@ const run = async () => {
   }
 
   const someText = `Wrote number ${parseInt(
-    Math.random() * 1000
+    Math.random() * 1000,
   )} at ${new Date().toISOString()}\n`;
 
   // write to tmp file and then replace it

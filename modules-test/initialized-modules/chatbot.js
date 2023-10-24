@@ -1,22 +1,20 @@
-const readline = require('readline');
+const readline = require("readline");
 
-const logger = require('./logger');
-
-
+const logger = require("./logger");
 
 function initChatBot() {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: 'bot> '
+    prompt: "bot> ",
   });
 
   rl.prompt();
 
-  rl.on('line', (line) => {
+  rl.on("line", (line) => {
     switch (line.trim()) {
-      case 'exit':
-        console.log('Have a great day!');
+      case "exit":
+        console.log("Have a great day!");
         process.exit(0);
         break;
       default:
@@ -26,8 +24,8 @@ function initChatBot() {
         break;
     }
     rl.prompt();
-  }).on('close', () => {
-    console.log('Have a great day!');
+  }).on("close", () => {
+    console.log("Have a great day!");
     process.exit(0);
   });
 }

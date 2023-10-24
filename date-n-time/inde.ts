@@ -14,12 +14,12 @@ const run = async () => {
 
   console.log(
     "isTimestamp1LessthanTimestamp2(t1, t2): ",
-    isTimestamp1LessthanTimestamp2(t1, t2)
+    isTimestamp1LessthanTimestamp2(t1, t2),
   );
 
   console.log(
     "isTimestamp1LessthanTimestamp2(t2, t1): ",
-    isTimestamp1LessthanTimestamp2(t2, t1)
+    isTimestamp1LessthanTimestamp2(t2, t1),
   );
 };
 

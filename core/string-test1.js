@@ -6,5 +6,5 @@ ldkjf \
     lkdjf \
     lkjdf \
     ldkjf
-    `
+    `;
 console.log(str2.trim());

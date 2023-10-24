@@ -17,5 +17,4 @@ const run = () => {
   getSomething(cb);
 };
 
-
 run();

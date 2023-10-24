@@ -12,7 +12,7 @@ function createBz2file(inputFilePath, outputFilePath) {
           reject(err);
         }
         resolve();
-      }
+      },
     );
   });
 }
@@ -20,7 +20,7 @@ function createBz2file(inputFilePath, outputFilePath) {
 const run = async () => {
   await createBz2file(
     "/home/mui/Downloads/summary-27.json",
-    "/home/mui/Downloads/summary-27.json.tar.gz"
+    "/home/mui/Downloads/summary-27.json.tar.gz",
   );
 };
 

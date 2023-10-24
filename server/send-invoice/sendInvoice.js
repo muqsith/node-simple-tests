@@ -6,7 +6,7 @@ const FormData = require("form-data");
 const sendInvoice = async (orderId) => {
   try {
     const tokenFileData = await fs.readFile(
-      pathModule.resolve(__dirname, "tmp", "token.txt")
+      pathModule.resolve(__dirname, "tmp", "token.txt"),
     );
     const apiToken = `Bearer ${tokenFileData.toString("utf8")}`;
     console.log("apiToken", apiToken);
