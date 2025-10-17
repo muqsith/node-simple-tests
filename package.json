@@ -76,7 +76,8 @@
     "urlparse-template": "^1.0.0",
     "uuid": "^8.3.2",
     "webdav": "^4.11.2",
-    "winston": "^3.10.0"
+    "winston": "^3.10.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.3",

@@ -1,9 +1,9 @@
-const fs = require("fs-extra");
+const fs = require('fs-extra');
 
-fs.remove("/tmp/delete-test/temp1", (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("deleted sucessfully");
-  }
-});
+const run = async () => {
+  await fs.remove('/tmp/delete-test/temp1');
+  await fs.unlink('/tmp/delete-test/temp2');
+  console.log('deleted sucessfully');
+};
+
+run();
